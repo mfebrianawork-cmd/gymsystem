@@ -1,0 +1,65 @@
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --text: #1d2330;
+  --muted: #667085;
+  --border: #e3e6eb;
+  --accent: #e4572e;
+  --accent-text: #ffffff;
+  --ok: #1f9d55;
+  --warn: #c27c0e;
+  --bad: #d03b3b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151b;
+    --surface: #1b1f27;
+    --text: #e7e9ee;
+    --muted: #98a1b3;
+    --border: #2c323d;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--text); }
+header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+header h1 { margin: 0; font-size: 20px; color: var(--accent); }
+nav { display: flex; flex-wrap: wrap; gap: 4px; }
+nav button { background: none; color: var(--muted); border: none; }
+nav button.active { background: var(--bg); color: var(--text); }
+main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+h2 { font-size: 16px; margin: 24px 0 8px; }
+.view { display: none; }
+.view.active { display: block; }
+button { font: inherit; padding: 8px 14px; border-radius: 6px; border: 1px solid transparent; background: var(--accent); color: var(--accent-text); cursor: pointer; }
+button.secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+button.small { padding: 4px 10px; font-size: 13px; }
+input, select { font: inherit; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); min-width: 0; }
+.toolbar, form.inline { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.toolbar input, #checkin-search { flex: 1 1 240px; }
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; }
+tbody tr:last-child td { border-bottom: none; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+th { color: var(--muted); font-weight: 600; font-size: 13px; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.clickable:hover { background: var(--bg); }
+.empty { color: var(--muted); text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.stat .label { color: var(--muted); font-size: 13px; }
+.stat .value { font-size: 28px; font-weight: 700; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.badge.ok { background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok); }
+.badge.warn { background: color-mix(in srgb, var(--warn) 15%, transparent); color: var(--warn); }
+.badge.bad { background: color-mix(in srgb, var(--bad) 15%, transparent); color: var(--bad); }
+dialog { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); width: min(560px, calc(100vw - 32px)); padding: 20px; }
+dialog::backdrop { background: rgb(0 0 0 / 0.4); }
+dialog h2 { margin-top: 0; }
+dialog label { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+.actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.error { color: var(--bad); min-height: 1.2em; margin: 0; }
+.result { padding: 12px 16px; border-radius: 8px; margin-bottom: 12px; font-weight: 600; }
+.result.ok { background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok); }
+.result.bad { background: color-mix(in srgb, var(--bad) 15%, transparent); color: var(--bad); }
+#toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 8px; opacity: 0; transition: opacity .2s; pointer-events: none; max-width: calc(100vw - 32px); }
+#toast.show { opacity: 1; }

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Gym System</h1>
+    <nav>
+      <button data-view="dashboard" class="active">Dashboard</button>
+      <button data-view="checkin">Check-in</button>
+      <button data-view="members">Members</button>
+      <button data-view="plans">Plans</button>
+      <button data-view="payments">Payments</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-dashboard" class="view active">
+      <div class="stats" id="stats"></div>
+      <h2>Memberships expiring in the next 7 days</h2>
+      <div class="table-wrap"><table><thead><tr><th>Member</th><th>Email</th><th>Ends</th></tr></thead><tbody id="expiring"></tbody></table></div>
+    </section>
+
+    <section id="view-checkin" class="view">
+      <form id="checkin-form" class="inline">
+        <input id="checkin-search" placeholder="Search member by name, email or phone" autocomplete="off" list="checkin-options">
+        <datalist id="checkin-options"></datalist>
+        <button type="submit">Check in</button>
+      </form>
+      <div id="checkin-result"></div>
+      <h2>Today's check-ins</h2>
+      <div class="table-wrap"><table><thead><tr><th>Time (UTC)</th><th>Member</th></tr></thead><tbody id="checkins"></tbody></table></div>
+    </section>
+
+    <section id="view-members" class="view">
+      <div class="toolbar">
+        <input id="member-search" placeholder="Search members" autocomplete="off">
+        <button id="new-member">New member</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Membership</th><th>Status</th></tr></thead>
+        <tbody id="members"></tbody>
+      </table></div>
+    </section>
+
+    <section id="view-plans" class="view">
+      <form id="plan-form" class="inline">
+        <input name="name" placeholder="Plan name" required>
+        <input name="duration_days" type="number" min="1" placeholder="Days" required>
+        <input name="price" type="number" min="0" step="0.01" placeholder="Price" required>
+        <input name="description" placeholder="Description">
+        <button type="submit">Add plan</button>
+      </form>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Duration</th><th>Price</th><th>Description</th><th>Status</th><th></th></tr></thead>
+        <tbody id="plans"></tbody>
+      </table></div>
+    </section>
+
+    <section id="view-payments" class="view">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Date</th><th>Member</th><th>Amount</th><th>Method</th><th>Note</th></tr></thead>
+        <tbody id="payments"></tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <dialog id="member-dialog">
+    <form id="member-form" method="dialog">
+      <h2 id="member-dialog-title">New member</h2>
+      <label>First name <input name="first_name" required></label>
+      <label>Last name <input name="last_name" required></label>
+      <label>Email <input name="email" type="email" required></label>
+      <label>Phone <input name="phone"></label>
+      <label>Birth date <input name="birth_date" type="date"></label>
+      <label>Status
+        <select name="status"><option value="active">Active</option><option value="inactive">Inactive</option></select>
+      </label>
+      <p class="error" id="member-error"></p>
+      <div class="actions">
+        <button type="button" class="secondary" data-close>Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="detail-dialog">
+    <div id="detail"></div>
+  </dialog>
+
+  <div id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
